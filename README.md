@@ -6,7 +6,7 @@ Introduction
 
 This is a sample application designed with the following patterns:
 
-- Domain Driven Design
+- [Domain Driven Design](http://domainlanguage.com/ddd/)
 - [CQRS](http://martinfowler.com/bliki/CQRS.html)
 - [Event Sourcing](http://martinfowler.com/eaaDev/EventSourcing.html)
 
@@ -21,6 +21,12 @@ To achieve this, it will be made use of the frameworks:
 
 The application will be created step by step. Each step will be illustrated by a Maven project.
 
+Step by step
+-------
+
+=== Step 0 - Helloworld ===
+
+A bare bone Maven project to print a simple "Hello World!" on the console, using the File System to store the events.
 
 Building
 -------
@@ -57,6 +63,9 @@ CQRS, l’architecture aux deux visages :
 
 - [http://blog.octo.com/cqrs-larchitecture-aux-deux-visages-partie-1/](1ère partie)
 - [http://blog.octo.com/cqrs-larchitecture-aux-deux-visages-partie2/](2e partie)
+
+Event Sourcing vs Command Sourcing
+http://thinkbeforecoding.com/post/2013/07/28/Event-Sourcing-vs-Command-Sourcing
 
 
 Licenses
