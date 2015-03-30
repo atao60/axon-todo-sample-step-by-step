@@ -28,6 +28,11 @@ Step by step
 
 A bare bone Maven project to print a simple "Hello World!" on the console, using the File System to store the events.
 
+=== Step 1 - Helloworld again ===
+
+Upgrading Maven tools et refactoring the runner.
+
+
 Building
 -------
 
