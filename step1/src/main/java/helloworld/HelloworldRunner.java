@@ -24,32 +24,77 @@ public class HelloworldRunner {
 	 
     private static final String EVENTS_STORAGE_FILE_PATH = "./target/events";
 	private static final String NEED_TO_BE_GREETED = "World";
+	
+	private final String storageFilePath;
+	private CommandBus commandBus;
+	private CommandGateway commandGateway;
+	private EventStore eventStore;
+	private EventBus eventBus;
+	private EventSourcingRepository<Helloworld> eventSourcingRepository;
+	private boolean ready;
+	
+	public HelloworldRunner(String storageFilePath) {
+		this.storageFilePath = storageFilePath;
+		
+	}
 
-	public static void main(String[] args) {
-        // let's start with the Command Bus
-        CommandBus commandBus = new SimpleCommandBus();
- 
-        // the CommandGateway provides a friendlier API
-        CommandGateway commandGateway = new DefaultCommandGateway(commandBus);
- 
-        // we'll store Events on the FileSystem, in the "events/" folder
-        EventStore eventStore = new FileSystemEventStore(new SimpleEventFileResolver(new File(EVENTS_STORAGE_FILE_PATH)));
- 
-        // a Simple Event Bus will do
-        EventBus eventBus = new SimpleEventBus();
- 
-        // we need to configure the repository
-        EventSourcingRepository<Helloworld> repository = new EventSourcingRepository<>(Helloworld.class, eventStore);
-        repository.setEventBus(eventBus);
- 
-        // Axon needs to know that our ToDoItem Aggregate can handle commands
-        AggregateAnnotationCommandHandler.subscribe(Helloworld.class, repository, commandBus);
+	protected void createCommandBus() {
+			commandBus = new SimpleCommandBus();
+	}
+	
+    /* 
+     * the CommandGateway provides a friendlier API
+     */
+	protected void createCommandGateway() {
+			commandGateway = new DefaultCommandGateway(commandBus);
+	}
+	
+    /*
+     *  store Events on the FileSystem, in the "events/" folder
+     */
+	protected void createEventStore() {
+			eventStore = new FileSystemEventStore(new SimpleEventFileResolver(new File(storageFilePath)));
+	}
+	
+	/*
+	 *  a Simple Event Bus will do
+	 */
+	protected void createEventBus() {
+			eventBus = new SimpleEventBus();
+	}
+	
+	protected void createEventSourcingRepository() {
+			eventSourcingRepository = new EventSourcingRepository<>(Helloworld.class, eventStore);
+			// we need to configure the repository
+			eventSourcingRepository.setEventBus(eventBus);
+	}
+	
+	public HelloworldRunner start() {
+		createCommandBus();
+		createCommandGateway();
+		createEventStore();
+		createEventBus();
+		createEventSourcingRepository();
+
+		// Axon needs to know that our Helloworld Aggregate can handle commands
+        AggregateAnnotationCommandHandler.subscribe(Helloworld.class, eventSourcingRepository, commandBus);
         
         // do something with instances of Event
         AnnotationEventListenerAdapter.subscribe(new HelloworldEventHandler(), eventBus);
- 
-        // and let's send some Commands on the CommandBus.
+		ready = true;
+		return this;
+	}
+	
+	public void send(Object command) {
+		if(!ready) throw new IllegalStateException("Helloworld runner must be ready before sending a command.");
+		commandGateway.send(command);
+	}
+	
+	public static void main(String[] args) {
+		
+		HelloworldRunner runner = new HelloworldRunner(EVENTS_STORAGE_FILE_PATH).start();
+
         final String itemId = UUID.randomUUID().toString();
-        commandGateway.send(new CreateHelloworldCommand(itemId, NEED_TO_BE_GREETED));
+        runner.send(new CreateHelloworldCommand(itemId, NEED_TO_BE_GREETED));
     }
 }

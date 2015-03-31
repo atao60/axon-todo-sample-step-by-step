@@ -30,7 +30,7 @@ A bare bone Maven project to print a simple "Hello World!" on the console, using
 
 === Step 1 - Helloworld again ===
 
-Upgrading Maven tools et refactoring the runner.
+Upgrading Maven tools and refactoring the runner.
 
 
 Building

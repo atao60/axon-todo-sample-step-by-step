@@ -42,7 +42,7 @@ public class HelloworldRunner {
         EventSourcingRepository<Helloworld> repository = new EventSourcingRepository<>(Helloworld.class, eventStore);
         repository.setEventBus(eventBus);
  
-        // Axon needs to know that our ToDoItem Aggregate can handle commands
+        // Axon needs to know that our Helloworld Aggregate can handle commands
         AggregateAnnotationCommandHandler.subscribe(Helloworld.class, repository, commandBus);
         
         // do something with instances of Event
