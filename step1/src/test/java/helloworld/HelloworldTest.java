@@ -17,12 +17,12 @@ public class HelloworldTest {
 	private FixtureConfiguration<Helloworld> fixture;
 
 	@Before
-	public void setUp() throws Exception {
+	public void setUp() {
 		fixture = Fixtures.newGivenWhenThenFixture(Helloworld.class);
 	}
 
 	@Test
-	public void testCreateToDoItem() throws Exception {
+	public void testCreateToDoItem() {
 		fixture.given()
 				.when(new CreateHelloworldCommand(HELLOWORD_ID,
 						HELLOWORD_NAME_TO_BE_GREETED))
