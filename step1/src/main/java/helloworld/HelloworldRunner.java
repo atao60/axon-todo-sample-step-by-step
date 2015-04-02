@@ -24,6 +24,7 @@ public class HelloworldRunner {
 	 
     private static final String EVENTS_STORAGE_FILE_PATH = "./target/events";
 	private static final String NEED_TO_BE_GREETED = "World";
+	private static final String NOT_READY = "Helloworld runner must be ready before sending a command.";
 	
 	private final String storageFilePath;
 	private CommandBus commandBus;
@@ -86,7 +87,7 @@ public class HelloworldRunner {
 	}
 	
 	public void send(Object command) {
-		if(!ready) throw new IllegalStateException("Helloworld runner must be ready before sending a command.");
+		if(!ready) throw new IllegalStateException(NOT_READY);
 		commandGateway.send(command);
 	}
 	
