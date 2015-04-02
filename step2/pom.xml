@@ -1,0 +1,294 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project
+    xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>popsuite-axon-samples</groupId>
+    <artifactId>step2-helloworld</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+
+    <name>Axon Helloworld (step 2) Sample Project</name>
+
+    <properties>
+        <xtend.outputDir>${project.build.directory}/xtend-gen/main</xtend.outputDir>
+        <xtend.testOutputDir>${project.build.directory}/xtend-gen/test</xtend.testOutputDir>
+
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+
+        <jdk.version>1.8</jdk.version>
+        <maven.compiler.source>${jdk.version}</maven.compiler.source>
+        <maven.compiler.target>${jdk.version}</maven.compiler.target>
+        <maven.compiler.compilerVersion>${jdk.version}</maven.compiler.compilerVersion>
+        <maven.compiler.fork>true</maven.compiler.fork>
+        <maven.compiler.verbose>true</maven.compiler.verbose>
+        <maven.compiler.optimize>true</maven.compiler.optimize>
+        <maven.compiler.debug>true</maven.compiler.debug>
+
+        <!-- Maven and Plugin Management -->
+        <maven.minimal.version>3.1</maven.minimal.version>
+
+        <enforcer.maven.version>1.4</enforcer.maven.version>
+        <build.helper.maven.version>1.9.1</build.helper.maven.version>
+        <compiler.maven.version>2.5.1</compiler.maven.version>
+        <surefire.maven.version>2.12.4</surefire.maven.version>
+        <jar.maven.version>2.4</jar.maven.version>
+        <clean.maven.version>2.5</clean.maven.version>
+        <install.maven.version>2.4</install.maven.version>
+        <site.maven.version>3.3</site.maven.version>
+        <resources.maven.version>2.6</resources.maven.version>
+        <deploy.maven.version>2.7</deploy.maven.version>
+        <assembly.maven.version>2.5.3</assembly.maven.version>
+
+        <xtend.maven.version>2.7.3</xtend.maven.version>
+
+
+        <!-- Dependency Management -->
+        <junit.version>4.12</junit.version>
+        <hamcrest.version>1.3</hamcrest.version>
+        <slf4j.version>1.7.12</slf4j.version>
+        <logback.version>1.1.3</logback.version>
+
+        <axon.version>2.4</axon.version>
+        <xtend.version>2.7.3</xtend.version><!-- jnario-1.0.1 can't use xtend 2.8.0-->
+
+    </properties>
+
+    <build>
+        <plugins>
+            <plugin>
+                <artifactId>maven-clean-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>build-helper-maven-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.eclipse.xtend</groupId>
+                <artifactId>xtend-maven-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <artifactId>maven-enforcer-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <mainClass>helloworld.HelloworldRunner</mainClass>
+                        </manifest>
+                    </archive>
+                    <descriptorRefs>
+                        <descriptorRef>jar-with-dependencies</descriptorRef>
+                    </descriptorRefs>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>make-assembly</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+
+        <pluginManagement>
+            <plugins>
+                <!-- required to be be able to put the xtend classes in a separate source folder -->
+                <plugin>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>build-helper-maven-plugin</artifactId>
+                    <version>${build.helper.maven.version}</version>
+                    <executions>
+                        <execution>
+                            <id>get-maven-version</id>
+                            <goals>
+                                <goal>maven-version</goal>
+                            </goals>
+                        </execution>
+                        <execution>
+                            <id>add-source</id>
+                            <phase>generate-sources</phase>
+                            <goals>
+                                <goal>add-source</goal>
+                            </goals>
+                            <configuration>
+                                <sources>
+                                    <source>src/main/xtend</source>
+                                </sources>
+                            </configuration>
+                        </execution>
+                        <execution>
+                            <id>add-test-source</id>
+                            <phase>generate-test-sources</phase>
+                            <goals>
+                                <goal>add-test-source</goal>
+                            </goals>
+                            <configuration>
+                                <sources>
+                                    <source>src/test/xtend</source>
+                                </sources>
+                            </configuration>
+                        </execution>
+                    </executions>
+                </plugin>
+                <plugin>
+                    <groupId>org.eclipse.xtend</groupId>
+                    <artifactId>xtend-maven-plugin</artifactId>
+                    <version>${xtend.maven.version}</version>
+                    <executions>
+                        <execution>
+                            <goals>
+                                <goal>compile</goal>
+                                <goal>testCompile</goal>
+                            </goals>
+                            <configuration>
+                                <outputDirectory>${xtend.outputDir}</outputDirectory>
+                                <testOutputDirectory>${xtend.testOutputDir}</testOutputDirectory>
+                            </configuration>
+                        </execution>
+                    </executions>
+                </plugin>
+                <plugin>
+                    <artifactId>maven-enforcer-plugin</artifactId>
+                    <version>${enforcer.maven.version}</version>
+                    <executions>
+                        <execution>
+                            <id>enforce-version</id>
+                            <goals>
+                                <goal>enforce</goal>
+                            </goals>
+                            <configuration>
+                                <fail>true</fail>
+                                <rules>
+                                    <requireMavenVersion>
+                                        <version>${maven.minimal.version}</version>
+                                        <message><![CDATA[[ERROR] OLD MAVEN [${maven.version}] in use. 
+                                            Maven ${maven.minimal.version} or newer is required.]]>
+                                        </message>
+                                    </requireMavenVersion>
+                                    <requireJavaVersion>
+                                        <version>${jdk.version}</version>
+                                        <message><![CDATA[[ERROR] OLD JDK [${java.version}] in use. 
+                                            JDK ${jdk.version} or newer is required.]]>
+                                        </message>
+                                    </requireJavaVersion>
+                                    <requirePluginVersions>
+                                        <banLatest>true</banLatest>
+                                        <banRelease>true</banRelease>
+                                        <banSnapshots>true</banSnapshots>
+                                    </requirePluginVersions>
+                                    <bannedDependencies>
+                                        <searchTransitive>true</searchTransitive>
+                                        <excludes>
+                                            <exclude>commons-logging</exclude>
+                                            <exclude>log4j</exclude>
+                                            <exclude>org.apache.logging.log4j</exclude>
+                                        </excludes>
+                                    </bannedDependencies>
+                                </rules>
+                            </configuration>
+                        </execution>
+                    </executions>
+                </plugin>
+                <plugin>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>${compiler.maven.version}</version>
+                </plugin>
+                <plugin>
+                    <artifactId>maven-surefire-plugin</artifactId>
+                    <version>${surefire.maven.version}</version>
+                </plugin>
+                <plugin>
+                    <artifactId>maven-jar-plugin</artifactId>
+                    <version>${jar.maven.version}</version>
+                </plugin>
+                <plugin>
+                    <artifactId>maven-clean-plugin</artifactId>
+                    <version>${clean.maven.version}</version>
+                </plugin>
+                <plugin>
+                    <artifactId>maven-install-plugin</artifactId>
+                    <version>${install.maven.version}</version>
+                </plugin>
+                <plugin>
+                    <artifactId>maven-site-plugin</artifactId>
+                    <version>${site.maven.version}</version>
+                </plugin>
+                <plugin>
+                    <artifactId>maven-resources-plugin</artifactId>
+                    <version>${resources.maven.version}</version>
+                </plugin>
+                <plugin>
+                    <artifactId>maven-deploy-plugin</artifactId>
+                    <version>${deploy.maven.version}</version>
+                </plugin>
+                <plugin>
+                    <artifactId>maven-assembly-plugin</artifactId>
+                    <version>${assembly.maven.version}</version>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
+
+    <dependencies>
+
+        <dependency>
+            <groupId>popsuite-xtend-contrib</groupId>
+            <artifactId>xtend-contrib</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+
+        <!-- Axon -->
+        <dependency>
+            <groupId>org.axonframework</groupId>
+            <artifactId>axon-core</artifactId>
+            <version>${axon.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.axonframework</groupId>
+            <artifactId>axon-test</artifactId>
+            <version>${axon.version}</version>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- Xtend -->
+        <dependency>
+            <groupId>org.eclipse.xtend</groupId>
+            <artifactId>org.eclipse.xtend.lib</artifactId>
+            <version>${xtend.version}</version>
+        </dependency>
+
+        <!-- logs -->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>log4j-over-slf4j</artifactId>
+            <version>${slf4j.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <version>${logback.version}</version>
+        </dependency>
+
+        <!-- tests -->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>${junit.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.hamcrest</groupId>
+            <artifactId>hamcrest-all</artifactId>
+            <version>${hamcrest.version}</version>
+            <scope>test</scope>
+        </dependency>
+
+    </dependencies>
+
+</project>
