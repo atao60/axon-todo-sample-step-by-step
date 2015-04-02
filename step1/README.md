@@ -1,3 +1,5 @@
+Refactoring of the pom and the runner.
+
 Building
 -------
 
