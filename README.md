@@ -41,7 +41,7 @@ Refactoring with [Xtend](http://eclipse.org/xtend/).
 
 Use [Polyglot for Maven](https://github.com/takari/maven-polyglot) with [Groovy](http://groovy-lang.org/)
 
-At the moment, this project works only with Maven on command line. Eclipse is unable to deal with it.
+At the moment, this project works only with Maven on command line. Eclipse Luna (SR1 or SR2) is unable to deal with it.
 
 
 Building
@@ -77,11 +77,10 @@ Documentation
 
 CQRS, l’architecture aux deux visages :
 
-- [http://blog.octo.com/cqrs-larchitecture-aux-deux-visages-partie-1/](1ère partie)
-- [http://blog.octo.com/cqrs-larchitecture-aux-deux-visages-partie2/](2e partie)
+- [1ère partie](http://blog.octo.com/cqrs-larchitecture-aux-deux-visages-partie-1/)
+- [2e partie](http://blog.octo.com/cqrs-larchitecture-aux-deux-visages-partie2/)
 
-Event Sourcing vs Command Sourcing
-http://thinkbeforecoding.com/post/2013/07/28/Event-Sourcing-vs-Command-Sourcing
+[Event Sourcing vs Command Sourcing](http://thinkbeforecoding.com/post/2013/07/28/Event-Sourcing-vs-Command-Sourcing)
 
 
 Licenses
