@@ -10,6 +10,7 @@
     <version>0.0.1-SNAPSHOT</version>
 
     <name>Axon Helloworld (step 2) Sample Project</name>
+    <description>Axon with Xtend</description>
 
     <properties>
         <xtend.outputDir>${project.build.directory}/xtend-gen/main</xtend.outputDir>
