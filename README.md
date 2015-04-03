@@ -13,10 +13,11 @@ This is a sample application designed with the following patterns:
 To achieve this, it will be made use of the frameworks:
 
 - [Axon Framework](http://www.axonframework.org/)
-- [Hibernate](http://hibernate.org/)
+- [Hibernate](http://hibernate.org/)/EclipseLink
 - [Spring Transaction Management](http://projects.spring.io/spring-framework/)
 - [Vert.x](http://vertx.io/)
-- [xTend](http://eclipse.org/xtend/)
+- [Xtend](http://eclipse.org/xtend/)
+- [Maven Polyglot](https://github.com/takari/maven-polyglot)
 - ...
 
 The application will be created step by step. Each step will be illustrated by a Maven project.
@@ -24,17 +25,21 @@ The application will be created step by step. Each step will be illustrated by a
 Step by step
 -------
 
-=== Step 0 - Helloworld ===
+#### Step 0 - Helloworld ####
 
-A bare bone Maven project to print a simple "Hello World!" on the console, using the File System to store the events.
+A bare bone [Maven](https://maven.apache.org/) project to print a simple "Hello World!" on the console, using the File System to store the events.
 
-=== Step 1 - Helloworld again ===
+#### Step 1 - Helloworld again ####
 
-Refactoring of the Maven pom and the runner.
+Refactoring of the [Maven](https://maven.apache.org/) pom and the runner.
 
-=== Step 2 - Helloworld with Xtend ===
+#### Step 2 - Helloworld with [Xtend](http://eclipse.org/xtend/) ####
 
-Refactoring with Xtend.
+Refactoring with [Xtend](http://eclipse.org/xtend/).
+
+#### Step 3 - Helloworld with Maven [Maven Polyglot](https://github.com/takari/maven-polyglot) ####
+
+Use [Maven Polyglot](https://github.com/takari/maven-polyglot) with [Groovy](http://groovy-lang.org/)
 
 
 Building
