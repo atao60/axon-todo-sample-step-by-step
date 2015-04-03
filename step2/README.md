@@ -1,5 +1,7 @@
 Use of Xtend.
 
+The active annotation [DefaultSerializable](https://github.com/atao60/axon-todo-sample-step-by-step/tree/master/xtend-contrib) is used to avoid warning message about unused member "serialVersionUID" with serializable classes.
+
 Building
 -------
 
