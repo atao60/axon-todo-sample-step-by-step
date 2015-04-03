@@ -2,10 +2,10 @@ project {
 	modelVersion '4.0.0'
 	
 	groupId 'popsuite-axon-samples'
-	artifactId 'step2-helloworld'
+	artifactId 'step3-helloworld'
 	version '0.0.1-SNAPSHOT'
 	
-	name 'Axon Helloworld (step 3) Sample Project'
+	name 'Axon Helloworld (step 3) Sample Project '
 	description 'Axon with Xtend - Using Polyglot Maven'
 	
 	properties {

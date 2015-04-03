@@ -37,9 +37,11 @@ Refactoring of the [Maven](https://maven.apache.org/) pom and the runner.
 
 Refactoring with [Xtend](http://eclipse.org/xtend/).
 
-#### Step 3 - Helloworld with Maven [Maven Polyglot](https://github.com/takari/maven-polyglot) ####
+#### Step 3 - Helloworld with [Polyglot for Maven](https://github.com/takari/maven-polyglot) ####
 
-Use [Maven Polyglot](https://github.com/takari/maven-polyglot) with [Groovy](http://groovy-lang.org/)
+Use [Polyglot for Maven](https://github.com/takari/maven-polyglot) with [Groovy](http://groovy-lang.org/)
+
+At the moment, this project works only with Maven on command line. Eclipse is unable to deal with it.
 
 
 Building
