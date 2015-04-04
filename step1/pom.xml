@@ -10,6 +10,7 @@
     <version>0.0.1-SNAPSHOT</version>
 
     <name>Axon Helloworld (step 1) Sample Project</name>
+    <description>A simple Helloword Application using Axon Framework</description>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -38,7 +39,7 @@
         <resources.maven.version>2.6</resources.maven.version>
         <deploy.maven.version>2.7</deploy.maven.version>
         <assembly.maven.version>2.5.3</assembly.maven.version>
-
+        <shade.maven.version>2.3</shade.maven.version>
 
         <!-- Dependency Management -->
         <junit.version>4.12</junit.version>
@@ -59,27 +60,32 @@
                 <artifactId>maven-enforcer-plugin</artifactId>
             </plugin>
             <plugin>
-                <artifactId>maven-assembly-plugin</artifactId>
-                <configuration>
-                    <archive>
-                        <manifest>
-                            <mainClass>helloworld.HelloworldRunner</mainClass>
-                        </manifest>
-                    </archive>
-                    <descriptorRefs>
-                        <descriptorRef>jar-with-dependencies</descriptorRef>
-                    </descriptorRefs>
-                </configuration>
+                <artifactId>maven-shade-plugin</artifactId>
                 <executions>
                     <execution>
-                        <id>make-assembly</id>
                         <phase>package</phase>
                         <goals>
-                            <goal>single</goal>
+                            <goal>shade</goal>
                         </goals>
+                        <configuration>
+                            <transformers>
+                                <transformer
+                                    implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+                                    <mainClass>helloworld.HelloworldRunner</mainClass>
+                                </transformer>
+                                <transformer
+                                    implementation="org.apache.maven.plugins.shade.resource.IncludeResourceTransformer">
+                                    <file>README.md</file>
+                                    <resource>README.md</resource>
+                                </transformer>
+                            </transformers>
+                            <shadedArtifactAttached>true</shadedArtifactAttached>
+                            <shadedClassifierName>standalone</shadedClassifierName>
+                        </configuration>
                     </execution>
                 </executions>
             </plugin>
+
         </plugins>
         <pluginManagement>
             <plugins>
@@ -173,6 +179,10 @@
                 <plugin>
                     <artifactId>maven-assembly-plugin</artifactId>
                     <version>${assembly.maven.version}</version>
+                </plugin>
+                <plugin>
+                    <artifactId>maven-shade-plugin</artifactId>
+                    <version>${shade.maven.version}</version>
                 </plugin>
             </plugins>
         </pluginManagement>
