@@ -29,19 +29,19 @@ Step by step
 
 In fact, the first steps deal with a Hello World application, to stick to the most commun minimalistic model.
 
-#### [Step 0](https://github.com/atao60/axon-todo-sample-step-by-step/blob/master/step0) - Helloworld ####
+#### [Step 0](step0) - Helloworld ####
 
 A bare bone [Maven](https://maven.apache.org/) project to print a simple "Hello World!" on the console, using the File System to store the events.
 
-#### [Step 1](https://github.com/atao60/axon-todo-sample-step-by-step/blob/master/step1) - Helloworld again ####
+#### [Step 1](step1) - Helloworld again ####
 
 Refactoring of the Maven pom and the runner.
 
-#### [Step 2](https://github.com/atao60/axon-todo-sample-step-by-step/blob/master/step2) - Helloworld with [Xtend](http://eclipse.org/xtend/) ####
+#### [Step 2](step2) - Helloworld with [Xtend](http://eclipse.org/xtend/) ####
 
 Refactoring with [Xtend](http://eclipse.org/xtend/).
 
-#### [Step 3](https://github.com/atao60/axon-todo-sample-step-by-step/blob/master/step3) - Helloworld with [Polyglot for Maven](https://github.com/takari/maven-polyglot) ####
+#### [Step 3](step3) - Helloworld with [Polyglot for Maven](https://github.com/takari/maven-polyglot) ####
 
 Use [Polyglot](https://github.com/takari/maven-polyglot) with [Groovy](http://groovy-lang.org/)
 
