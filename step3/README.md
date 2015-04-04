@@ -16,6 +16,8 @@ Note. Don't forget to add the .mvn/extensions.xml file!
 To work under Eclipse, m2e-polyglot-poc must be installed, e.g. with the update site:
          
          http://dl.bintray.com/jbosstools/m2e-polyglot-poc/
+         
+> Note. This tool requires that a pom.xml file is present before editing the polyglot pom file. The pom.xml must be valid with at least an artifactId and a groupId, even if with arbitrary values.       
 
 Then each Maven Build launch configuration has to specify:
 
@@ -31,7 +33,7 @@ Building
 Running
 -------
 
-        java -jar target/step3-helloworld-0.0.1-SNAPSHOT-jar-standalone.jar
+        java -jar target/step3-helloworld-0.0.1-SNAPSHOT-standalone.jar
 
 will display something like "Greeting: Hello World (5564df04-e93d-48cd-800c-c2b19ae969e5)" on the console.
 
