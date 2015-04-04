@@ -1,56 +1,62 @@
 project {
 	modelVersion '4.0.0'
-	
+
 	groupId 'popsuite-axon-samples'
 	artifactId 'step3-helloworld'
 	version '0.0.1-SNAPSHOT'
-	
-	name 'Axon Helloworld (step 3) Sample Project '
-	description 'Axon with Xtend - Using Polyglot Maven'
-	
+
+	name 'Axon Helloworld (step 3) Sample Project'
+	description 'Axon with Xtend using Polyglot for Maven'
+
 	properties {
+
+		/* Project parameters */
+
 		'xtend.outputDir' '${project.build.directory}/xtend-gen/main'
 		'xtend.testOutputDir' '${project.build.directory}/xtend-gen/test'
-		
+
+		/* JVM Management */
+
 		'project.build.sourceEncoding' 'UTF-8'
 		'project.reporting.outputEncoding' 'UTF-8'
 
 		'jdk.version' '1.8'
+		'maven.compiler.source' '${jdk.version}'
 		'maven.compiler.target' '${jdk.version}'
 		'maven.compiler.compilerVersion' '${jdk.version}'
-		'maven.compiler.source' '${jdk.version}'
-		'maven.compiler.fork' 'true'
-		'maven.compiler.verbose' 'true'
 		'maven.compiler.debug' 'true'
 		'maven.compiler.optimize' 'true'
-		
+		'maven.compiler.verbose' 'true'
+		'maven.compiler.fork' 'true'
+
 		/* Maven and Plugin Management */
-		/* Maven 3.3.1 or above to get Polyglot */
-		'maven.minimal.version' '3.1'
+
+		'maven.minimal.version' '3.3.1' // Maven 3.3.1 or above to get Polyglot
 
 		'build.helper.maven.version' '1.9.1'
+		'shade.maven.version' '2.3'
 		'clean.maven.version' '2.5'
 		'site.maven.version' '3.3'
+		'xtend.maven.version' '2.7.3'
 		'install.maven.version' '2.4'
 		'surefire.maven.version' '2.12.4'
+		'junit.version' '4.12'
 		'resources.maven.version' '2.6'
 		'compiler.maven.version' '2.5.1'
 		'assembly.maven.version' '2.5.3'
 		'jar.maven.version' '2.4'
 		'enforcer.maven.version' '1.4'
 		'deploy.maven.version' '2.7'
-		'xtend.maven.version' '2.7.3'
-		
+
 		/* Dependency Management */
+
 		'axon.version' '2.4'
-		'xtend.version' '2.7.3'  // jnario-1.0.1 can't use xtend 2.8.0
+		'xtend.version' '2.7.3'   // atm even jnario-1.0.1 is anable to use xtend 2.8.0
+		'hamcrest.version' '1.3'
 		'logback.version' '1.1.3'
 		'slf4j.version' '1.7.12'
-		'junit.version' '4.12'
-		'hamcrest.version' '1.3'
 
 	}
-	
 	build {
 		plugins {
 			plugin { artifactId 'maven-clean-plugin' }
@@ -64,23 +70,26 @@ project {
 			}
 			plugin { artifactId 'maven-enforcer-plugin' }
 			plugin {
-				artifactId 'maven-assembly-plugin'
+				artifactId 'maven-shade-plugin'
 				executions {
 					execution {
-						id 'make-assembly'
 						phase 'package'
-						goals { goal 'single' }
+						goals { goal 'shade' }
+						configuration {
+							transformers {
+								transformer(implementation:'org.apache.maven.plugins.shade.resource.ManifestResourceTransformer') { mainClass 'helloworld.HelloworldRunner' }
+								transformer(implementation:'org.apache.maven.plugins.shade.resource.IncludeResourceTransformer') {
+									file 'README.md'
+									resource 'README.md'
+								}
+							}
+							shadedArtifactAttached 'true'
+							shadedClassifierName 'standalone'
+						}
 					}
-				}
-				configuration {
-					archive {
-						manifest { mainClass 'helloworld.HelloworldRunner' }
-					}
-					descriptorRefs { descriptorRef 'jar-with-dependencies' }
 				}
 			}
 		}
-		
 		pluginManagement {
 			plugins {
 				plugin {
@@ -201,9 +210,12 @@ project {
 					artifactId 'maven-assembly-plugin'
 					version '${assembly.maven.version}'
 				}
+				plugin {
+					artifactId 'maven-shade-plugin'
+					version '${shade.maven.version}'
+				}
 			}
 		}
-
 	}
 
 	dependencies {
@@ -251,5 +263,4 @@ project {
 			scope 'test'
 		}
 	}
-
 }
