@@ -1,4 +1,4 @@
-A Todo Application with AxonFramework, step by step
+A Todo List Application with AxonFramework, step by step
 ========
 
 Introduction
@@ -16,11 +16,11 @@ To achieve this, it will be made use of the frameworks:
 - [Xtend](http://eclipse.org/xtend/)
 - [Maven Polyglot](https://github.com/takari/maven-polyglot)
 - [Hibernate](http://hibernate.org/)/EclipseLink
-- [Spring Transaction Management](http://projects.spring.io/spring-framework/)
+- [Spring](http://projects.spring.io/spring-framework/)
 - [Vert.x](http://vertx.io/)
 - ...
 
-The application will be created step by step. Each step will be illustrated by a Maven project.
+The application will be created step by step. Each step will be illustrated by a Maven project. The first steps provide only a runner displaying messages on a console.
 
 Eclipse is used to edit the projects.
 
@@ -43,7 +43,11 @@ Refactoring with [Xtend](http://eclipse.org/xtend/).
 
 #### [Step 3](step3) - Helloworld with [Polyglot for Maven](https://github.com/takari/maven-polyglot) ####
 
-Use [Polyglot](https://github.com/takari/maven-polyglot) with [Groovy](http://groovy-lang.org/)
+Use [Polyglot for Maven](https://github.com/takari/maven-polyglot) with [Groovy](http://groovy-lang.org/)
+
+#### [Step 4](step4) - Helloworld with JPA persistence ####
+
+Use JPA for persistence. Require Spring.  
 
 Building
 -------
